@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Medical Claim Processing Pipeline
 
 A beginner-friendly implementation of the assignment using **FastAPI**, **LangGraph**, **PyMuPDF**, **Pydantic**, and optionally an OpenAI chat model.
@@ -269,3 +270,6 @@ This starter version extracts selectable PDF text but has no OCR for image-only 
 3. Push the source to a GitHub repository; do not commit `.env` or real claim documents.
 4. In the video, explain the graph flow, show an example page being classified, show that only matching page subsets go to each agent, and show the final JSON.
 5. If you deploy publicly, add authentication, upload limits, access controls, secure secret storage, rate limits, monitoring, privacy safeguards, and human review before handling real claim data.
+=======
+# claim-processing-pipeline
+>>>>>>> cfc9518c18a53885b391429e3dc7afdc0ae292be
