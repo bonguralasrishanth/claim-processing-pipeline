@@ -219,39 +219,5 @@ Tests cover the mock classifier, page routing (including the rule that an unassi
 - **No selectable text:** This starter version does not include OCR. The PDF is likely scanned; convert it to a searchable PDF or add an OCR stage such as Tesseract/AWS Textract/Azure Document Intelligence, subject to privacy approval.
 - **Model misses table rows:** Check the structured output against the PDF. LLM extraction should be treated as a draft, especially for claim adjudication; use confidence thresholds and human review in a production system.
 
-## 9. Interview explanation (practice this)
 
-### 60–90 second overview
 
-> “I built a document-processing REST API with FastAPI and LangGraph. The endpoint receives a claim ID and a multi-page PDF. I extract text per page and pass those page representations to a segregator node. The segregator classifies each page into one of nine required document types. LangGraph then fans out to three specialized agents—identity, discharge summary, and itemized bill—using `Send`, so every agent receives only the pages relevant to its task. Each agent returns structured, Pydantic-validated data. An aggregator joins the three results into one JSON response. For financial accuracy, I recalculate line-item totals in Python using `Decimal` instead of trusting an LLM calculation. The project also has a mock mode for local tests and an OpenAI mode for AI-based classification and extraction.”
-
-### Likely interview questions
-
-**Why LangGraph instead of one large prompt?**  
-The workflow has separate stages and explicit routing. Specialized agents receive less irrelevant content, can be tested independently, and can be extended without rewriting one giant prompt.
-
-**How do you prevent each agent from seeing the whole PDF?**  
-The router filters the per-page objects by classification and uses `Send` with a new state containing only the assigned pages. The extraction nodes read only the `pages` supplied in their message.
-
-**Why Pydantic structured output?**  
-It defines the contract for required fields and data types. The application can validate and normalize the result before returning JSON.
-
-**Why use `Decimal` for money?**  
-Binary floating-point can represent decimal currency values imprecisely. `Decimal` gives predictable cents-level calculations for billing amounts.
-
-**What happens if a page is ambiguous?**  
-The AI segregator can classify it as `other` and return a confidence and reason. Production code should route low-confidence pages to a review queue instead of silently making a claim decision.
-
-**What are the current limitations?**  
-This starter version extracts selectable PDF text but has no OCR for image-only scans; extraction should be human-reviewed; it does not include authentication, persistence, deployment, a retry queue, or full production observability.
-
-## 10. Before you submit
-
-1. Run tests and demonstrate `/api/process` in OpenAI mode, not just mock mode.
-2. Review the returned classifications and all bill rows against the PDF.
-3. Push the source to a GitHub repository; do not commit `.env` or real claim documents.
-4. In the video, explain the graph flow, show an example page being classified, show that only matching page subsets go to each agent, and show the final JSON.
-5. If you deploy publicly, add authentication, upload limits, access controls, secure secret storage, rate limits, monitoring, privacy safeguards, and human review before handling real claim data.
-=======
-# claim-processing-pipeline
->>>>>>> cfc9518c18a53885b391429e3dc7afdc0ae292be
