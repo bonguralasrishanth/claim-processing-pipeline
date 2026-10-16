@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Medical Claim Processing Pipeline
 
 A beginner-friendly implementation of the assignment using **FastAPI**, **LangGraph**, **PyMuPDF**, **Pydantic**, and optionally an OpenAI chat model.
@@ -83,16 +82,6 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-**Windows PowerShell:**
-
-```powershell
-py -3.11 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-```
-
-If PowerShell blocks activation, either use Command Prompt and run `.venv\Scripts\activate.bat`, or adjust your terminal policy according to your organization's IT guidance. You can also run `.venv\Scripts\python.exe -m pip install -r requirements.txt` without activating.
 
 ### Create your `.env` file
 
@@ -104,13 +93,6 @@ Copy `.env.example` to `.env`.
 cp .env.example .env
 ```
 
-**Windows PowerShell:**
-
-```powershell
-Copy-Item .env.example .env
-```
-
-Keep `LLM_MODE=mock` for the first run. You do not need an API key for this smoke test.
 
 ## 4. Run the API locally
 
